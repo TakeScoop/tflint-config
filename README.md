@@ -15,15 +15,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - id: fetch-tflint-config
-        uses: ryanwholey/remote-tflint-config@v1
+        uses: terraform-linters/tflint-load-config-action@v0
         with:
           source-repo: TakeScoop/tflint-config
       - uses: terraform-linters/setup-tflint@v1
-        name: Setup TFLint
-        with:
-          tflint_version: v0.29.0
-      - run: |
-          tflint \
-            --format compact \
-            --config ${{ steps.fetch-tflint-config.outputs.config-path }}
+      - run: tflint --format compact
 ```
